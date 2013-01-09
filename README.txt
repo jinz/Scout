@@ -1,0 +1,1 @@
+This is an attempt to test out synchronization of data across bluetooth for android devices.
