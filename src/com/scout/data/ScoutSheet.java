@@ -9,6 +9,7 @@ public abstract class ScoutSheet {
 	protected int teleop;
 	protected int endgame;
 	protected String notes;
+	protected boolean alliance;
 	
 	public ScoutSheet()
 	{
@@ -17,14 +18,16 @@ public abstract class ScoutSheet {
 		auton = 0;
 		teleop = 0;
 		endgame = 0;
+		alliance = true;
 	}
-	public ScoutSheet(int teamNum, int num)
+	public ScoutSheet(int teamNum, int num, boolean side)
 	{
 		team = teamNum;
 		matchNum = num;
 		auton = 0;
 		teleop = 0;
 		endgame = 0;
+		alliance = side;
 	}
 	
 	public int teamNum()
@@ -66,20 +69,25 @@ public abstract class ScoutSheet {
 	{
 		return endgame;
 	}
+	public boolean isRedAlliance()
+	{
+		return alliance;
+	}
 	public String toSaveFormat()
 	{
-		return team+"/;"+matchNum+"/;"+auton+","+teleop+","+endgame+"/;"+notes+"/;";
+		return team+"/;"+matchNum+"/;"+(alliance?"red":"blue")+"/;"+auton+","+teleop+","+endgame+"/;"+notes+"/;";
 	}
 	public void parseScoutData(String data)
 	{
 		String[] pieces = data.split("/;");
 		team = Integer.parseInt(pieces[0]);
 		matchNum = Integer.parseInt(pieces[1]);
-		String[] scores = pieces[2].split(",");
+		alliance = pieces[2].equals("red");
+		String[] scores = pieces[3].split(",");
 		auton = Integer.parseInt(scores[0]);
 		teleop = Integer.parseInt(scores[1]);
 		endgame = Integer.parseInt(scores[2]);
-		notes = pieces[3];
+		notes = pieces[4];
 	}
 	
 	public int hashCode()
