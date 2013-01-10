@@ -4,5 +4,7 @@
     <string name="app_name">Scout</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="searchTeam">Search Team</string>
+    <string name="searchMatch">Search Match</string>
 
 </resources>
